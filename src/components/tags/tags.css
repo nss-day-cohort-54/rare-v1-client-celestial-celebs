@@ -1,0 +1,13 @@
+.edit {
+    margin: .5em;
+}
+
+span {
+    margin: .2em;
+}
+
+.tags-list {
+    font-size: large;
+    text-align: center;
+    font-weight: 800;
+}
