@@ -1,10 +1,11 @@
 import {useState , useEffect} from "react";
 import { getAllTags } from "./tagsManager";
 import {BsFillPencilFill} from "react-icons/bs"
+import { TagsForm } from "./TagsForm";
 import "./tags.css"
 export const TagsList = () => {
     const [tags, setTags] = useState([])
-
+    const [tag, setTag] = useState([])
     useEffect(
         () => {
             getAllTags()
@@ -29,10 +30,12 @@ export const TagsList = () => {
                             <button class="delete"></button>
                             
                         </span>
+                        
                         </>
                 }
             )
         }
+        <div className="tags-list"><TagsForm tag={tag} setTag={setTag}/></div>
         </>
     )
 }
