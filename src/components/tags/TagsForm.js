@@ -2,6 +2,7 @@ import React from "react";
 import "../categories/Category.css"
 import { createTag } from "./tagsManager";
 
+
 export const TagsForm = ({tag, setTag}) => {
 
 
