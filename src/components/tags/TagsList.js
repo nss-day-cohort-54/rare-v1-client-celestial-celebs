@@ -20,7 +20,15 @@ export const TagsList = () => {
         {
             tags.map(
                 tags => {
-                    return <p key={tags.id}>{tags.label}</p>
+                    return <>
+                        <span class="tag is-primary" 
+                            key={`delete--${tags.id}`}>{tags.label}<button 
+                            class="delete"></button>
+                        </span>
+                        <span class="icon has-text-info" key={`edit--${tags.id}`}>
+                        <i class="fas fa-info-circle"></i>
+                        </span>
+                        </>
                 }
             )
         }
