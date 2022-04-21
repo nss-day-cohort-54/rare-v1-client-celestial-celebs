@@ -7,4 +7,13 @@ export const getSinglePost = (postId) => {
   .then(response => response.json())
 }
 
-
+export const createPost = (body) => {
+  return fetch(`http://localhost:8088/posts`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+  })
+      .then(response => response.json())
+}
