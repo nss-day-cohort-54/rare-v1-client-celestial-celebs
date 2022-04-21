@@ -3,6 +3,7 @@ import { Route } from "react-router-dom"
 import { Post } from "./post/PostDetail"
 import { CategoriesList } from "./categories/CategoriesList";
 import { PostList } from "./post/PostList"
+import { TagsList } from "./tags/TagsList";
 
 export const ApplicationViews = () => {
   return (
@@ -19,7 +20,7 @@ export const ApplicationViews = () => {
         <Post />
       </Route>
       <Route exact path="/tags">
-        <Post />
+        <TagsList />
       </Route>
     </>
   );

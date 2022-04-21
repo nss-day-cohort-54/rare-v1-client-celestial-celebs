@@ -18,7 +18,7 @@ export const Post = () => {
         currentPost?
         <>
         <h2 className="post_details_title">{currentPost.title}</h2>
-        <div className="post_details_author">{currentPost.user?.first_name} {currentPost?.user.last_name}</div>
+        <div className="post_details_author">{currentPost.user.first_name} {currentPost.user.last_name}</div>
         <div className="post_details_category">{currentPost.category.label}</div>
         <div className="post_details_publication_date">{currentPost.publication_date}</div>
         <div className="post_details_content">{currentPost.content}</div>

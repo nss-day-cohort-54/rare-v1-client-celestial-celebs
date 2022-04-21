@@ -1,12 +1,12 @@
 import {useState , useEffect} from "react";
+import { getAllTags } from "./tagsManager";
 
 export const TagsList = () => {
     const [tags, setTags] = useState([])
 
     useEffect(
         () => {
-            fetch("http://localhost:8088/tags")
-                .then(res => res.json())
+            getAllTags()
                 .then((data) => {
                     setTags(data)
                 })
@@ -19,7 +19,7 @@ export const TagsList = () => {
         <div>Tags</div>
         {
             tags.map(
-                category => {
+                tags => {
                     return <p key={tags.id}>{tags.label}</p>
                 }
             )
