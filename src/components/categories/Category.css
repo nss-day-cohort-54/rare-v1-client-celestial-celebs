@@ -1,0 +1,29 @@
+.category_form_container {
+    display: flex;
+    justify-content: center;
+    border: solid 1px black;
+    border-radius: 25px;
+    width: 20%;
+    float: right;
+    padding: 1rem;
+    margin-right: 2rem;
+}
+
+.form_button {
+    display: flex;
+    justify-content: center;
+}
+
+.category_button {
+    font-size: 18px;
+}
+
+.control {
+    display: flex;
+    justify-content: center;
+}
+
+.form_input {
+    width: 80%;
+    font-size: 16px;
+}

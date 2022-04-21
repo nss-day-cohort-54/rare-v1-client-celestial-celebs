@@ -1,12 +1,10 @@
-import React, { useState} from "react";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import { createCategory } from "./CategoriesManager";
+import "./Category.css"
 
+export const CategoryForm = ({category, setCategory}) => {
 
-export const CategoryForm = () => {
-
-const [category, setCategory] = useState({
-    label: ""
-})
 
 const changeCategoryState = (event) => {
     const newCategory = Object.assign({}, category)
@@ -14,30 +12,25 @@ const changeCategoryState = (event) => {
     setCategory(newCategory)
 }
 
-const handleSubmit = () =>{
+const handleSubmit = (e) => {
     createCategory(category)
 }
 
 
 return (
     <section className="category_form_container">
-      <form className="category_form" onSubmit={handleSubmit}>
+      <form className="category_form" >
         <h1 className="title">Create a new category</h1>
         <div className="field">
           <div className="control">
-            <input className="input" type="text" name="label" onChange={changeCategoryState} />
+            <input className="form_input" type="text" name="label" placeholder="Input a category..." value={category.label} onChange={changeCategoryState} />
           </div>
         </div>
-        <div className="field is-grouped">
+        <div className="form_button">
           <div className="control">
-            <button className="category_button" type="submit" >Submit</button>
-          </div>
-          <div className="control">
+            <button className="category_button" type="submit" onClick={handleSubmit}>Create</button>
           </div>
         </div>
-        {
-          isUnsuccessful ? <p className="help is-danger">Username or password not valid</p> : ''
-        }
       </form>
     </section>
   )
