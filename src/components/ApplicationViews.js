@@ -8,14 +8,14 @@ export const ApplicationViews = () => {
   return (
     <>
       {/* <h1 >Welcome to Rare Publishing</h1> */}
-      <Route path="/posts/:postId(\d+)">
-        <Post />
-      </Route>
       <Route exact path="/categories">
         <CategoriesList />
       </Route>
       <Route exact path="/posts">
         <PostList />
+      </Route>
+      <Route path="/posts/:postId(\d+)">
+        <Post />
       </Route>
     </>
   );
