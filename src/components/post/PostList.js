@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { getPosts } from "./PostManager";
 import Post from "./Post";
 
@@ -23,9 +23,9 @@ export const PostList = () => {
             <section className="post" key={post.id}>
               <Link to={`/posts/${post.id}`}>
                 <h3>{post.title}</h3>
-                <h3>{post.user_id}</h3>
-                <h3>{post.category}</h3>
               </Link>
+                <h3>{post.user_id}</h3>
+                <h3>{post.category.label}</h3>
             </section>
           );
         })}
