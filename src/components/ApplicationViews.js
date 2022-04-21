@@ -18,6 +18,9 @@ export const ApplicationViews = () => {
       <Route path="/posts/:postId(\d+)">
         <Post />
       </Route>
+      <Route exact path="/tags">
+        <Post />
+      </Route>
     </>
   );
 };
