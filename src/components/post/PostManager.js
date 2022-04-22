@@ -20,3 +20,12 @@ export const createPost = (body) => {
   })
       .then(response => response.json())
 }
+export const editPost = (body) => {
+  return fetch(`http://localhost:8088/posts/${body.id}`, {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+  })
+}
