@@ -18,19 +18,28 @@ export const UserPostList = () => {
 
 
         <article className="user-posts">
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Username</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Tags</th>
+                </tr>
             {posts.map((post) => {
             return (
-                <section className="user-post" key={post.id}>
-                <Link to={`/posts/${post.id}`}>
-                    <h3>{post.title}</h3>
-                </Link>
-                    <h3>{post.user.username}</h3>
-                    <h3>{post.publication_date}</h3>
-                    <h3>{post.category.label}</h3>
-                    <h3>{post.tags}</h3>
-                </section>
+                    <tr>
+                        <Link to={`/posts/${post.id}`}>
+                            <td>{post.title}</td>
+                        </Link>
+                        <td>{post.user.username}</td>
+                        <td>{post.publication_date}</td>
+                        <td>{post.category.label}</td>
+                        <td>{post.tags}</td>
+                    </tr>
             );
-            })}
+        })}
+        </table>
         </article>
         </div>
     );

@@ -12,3 +12,12 @@
 .user-post h3 {
     padding: .5em;
 }
+
+table, tr, td {
+    border: 1px solid black;
+    padding: .3em
+}
+
+a td {
+    border: none;
+}
