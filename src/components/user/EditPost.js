@@ -80,7 +80,7 @@ export const EditPost = () => {
                 </div>
                 <div className="publishForm_button">
                     <div className="control">
-                        <button className="publish_button" type="submit" onClick={handleSubmit}>Publish</button>
+                        <button className="publish_button" type="submit" onClick={handleSubmit}>Save</button>
                     </div>
                 </div>
             </form>
