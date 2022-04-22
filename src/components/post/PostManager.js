@@ -13,3 +13,13 @@ export const deletePost = (postId) => {
     method: "DELETE",
   });
 };
+
+export const createPost = (body) => {
+  return fetch(`http://localhost:8088/posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  }).then((response) => response.json());
+};
