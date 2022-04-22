@@ -1,0 +1,14 @@
+.user-posts {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+.user-post {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+}
+
+.user-post h3 {
+    padding: .5em;
+}
