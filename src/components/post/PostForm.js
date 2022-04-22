@@ -12,7 +12,7 @@ export const PostForm = () => {
         title: "",
         content: "",
         user_id: localStorage.getItem("token"),
-        category_id: 1,
+        category_id: "",
         publication_date: Date(Date.now()).toLocaleString('en-us').split('GMT')[0]
     })
     const history = useHistory()
@@ -39,11 +39,12 @@ export const PostForm = () => {
     }
 
     const handleSubmit = (e) => {
+        e.preventDefault()
         const lastIndex = posts.length - 1
-        const lastPostId = posts[lastIndex].id
-        newPost = {
+        const lastPostId = posts[lastIndex].id + 1
+        const newPost = {
             user_id: parseInt(post.user_id),
-            category_id: parseInt(category_id),
+            category_id: parseInt(post.category_id),
             title: post.title,
             publication_date: post.publication_date,
             content: post.content
@@ -58,33 +59,35 @@ export const PostForm = () => {
     return (
         <section className="post_form_container">
             <form className="post_form" >
-                <h1 className="title">New Post</h1>
-                <div className="field">
-                    <div className="control">
-                        <input className="post_title" type="text" name="title" placeholder="title" value={post.title} onChange={changePostState} />
+                <h1 className="formTitle">New Post</h1>
+                <div className="title_field">
+                    <div className="title_control">
+                        <input className="post_title" type="text" name="title" placeholder="Title" value={post.title} onChange={changePostState} />
                     </div>
                 </div>
                 <div className="field">
                     <div className="control">
-                        <input className="post_content" type="text" name="content" placeholder="Article content" value={post.content} onChange={changePostState} />
+                        <textarea className="post_content" type="text" name="content" placeholder="Article content" value={post.content} onChange={changePostState} />
                     </div>
                 </div>
-                <div>
-                    <select className="form-control"
+                <div className="dropdown_container">
+                    <div className="control">
+                    <select className="category_dropdown"
                         name="category_id"
                         value={post.category_id}
-                        placeholder="Category Select"
                         onChange={changePostState}>
+                            <option name="category_id" value="" >Select a category</option>
                         {
                             categories?.map((category, index) => {
                                 return <option key={index} name="category_id" value={category.id}>{category.label}</option>
                             })
                         }
                     </select>
+                    </div>
                 </div>
-                <div className="form_button">
+                <div className="publishForm_button">
                     <div className="control">
-                        <button className="category_button" type="submit" onClick={handleSubmit}>Create</button>
+                        <button className="publish_button" type="submit" onClick={handleSubmit}>Publish</button>
                     </div>
                 </div>
             </form>
