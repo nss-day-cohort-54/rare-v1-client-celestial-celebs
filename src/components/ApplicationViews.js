@@ -5,6 +5,7 @@ import { CategoriesList } from "./categories/CategoriesList";
 import { PostList } from "./post/PostList"
 import { PostForm } from "./post/PostForm";
 import { TagsList } from "./tags/TagsList";
+import { UserPostList } from "./user/UserPosts";
 
 export const ApplicationViews = () => {
   return (
@@ -25,6 +26,9 @@ export const ApplicationViews = () => {
       </Route>
       <Route exact path="/tags">
         <TagsList />
+      </Route>
+      <Route exact path="/my-posts">
+        < UserPostList/>
       </Route>
     </>
   );
