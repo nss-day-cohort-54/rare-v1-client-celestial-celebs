@@ -10,6 +10,12 @@ export const getSinglePost = (postId) => {
   .then(response => response.json())
 }
 
+export const getPostsByCategoryId = (categoryId) => {
+  return fetch(`http://localhost:8088/posts?category_id=${categoryId}`)
+  .then(response => response.json())
+}
+
+
 export const createPost = (body) => {
   return fetch(`http://localhost:8088/posts`, {
       method: "POST",
