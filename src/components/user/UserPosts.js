@@ -3,11 +3,13 @@ import { useHistory, Link } from "react-router-dom";
 import { getUserPosts } from "../post/PostManager";
 import {BsFillPencilFill} from "react-icons/bs"
 import "./UserPosts.css"
+
+// function shows all user posts specific to logged in user
 export const UserPostList = () => {
     const [posts, setPosts] = useState([]);
     const history = useHistory();
     const userId = parseInt(localStorage.getItem('token'))
-    
+    // gets all posts from specific user_id
     useEffect(() => {
         getUserPosts(userId).then((postData) => setPosts(postData));
     }, []);
@@ -24,6 +26,7 @@ export const UserPostList = () => {
                         <th>Category</th>
                         <th>Tags</th>
                     </tr>
+                    {/* map out all posts with edit button links to edit post, and post name links to post detail page */}
                 {posts.map((post) => {
                 return (
                         <tr>

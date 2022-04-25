@@ -2,6 +2,7 @@ import React from "react";
 // import "./Posts.css";
 import { Link } from "react-router-dom";
 
+// single post representation
 export default ({ post }) => (
   <section className="post">
     <h3 className="post__title">

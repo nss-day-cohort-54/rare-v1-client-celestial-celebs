@@ -3,6 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import { getPosts } from "./PostManager";
 import Post from "./Post";
 
+// function lists out all posts
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
   const history = useHistory();

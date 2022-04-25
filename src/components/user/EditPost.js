@@ -4,7 +4,7 @@ import { getCategories } from "../categories/CategoriesManager";
 import { editPost, getPosts, getSinglePost } from "../post/PostManager";
 import "../post/Post.css"
 
-
+// function allows user to edit content of post 
 export const EditPost = () => {
     const [categories, setCategories] = useState([])
     const history = useHistory()
