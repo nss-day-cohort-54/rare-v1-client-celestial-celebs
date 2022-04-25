@@ -8,7 +8,7 @@ import { useModal } from "./UseModal";
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
   const history = useHistory();
-  const [currentPost, setCurrentPost] = useState({});
+  const [currentPost, setCurrentPost] = useState();
 
   const { toggleDialogue, modalIsOpen } = useModal("delete-popup");
 
@@ -38,7 +38,7 @@ export const PostList = () => {
   };
 
   const confirmDelete = (post) => {
-    setCurrentPost(post);
+    setCurrentPost(post.id);
     toggleDialogue();
   };
 

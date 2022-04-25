@@ -13,10 +13,10 @@ export const DeleteDialogue = ({
       <div>
         <button
           onClick={() => {
-            deletePost(deletePostObject.id).then(
+            deletePost(deletePostObject).then(
               () =>
                 //   history.push("/posts");
-                setCurrentPost({}),
+                setCurrentPost(),
               toggleDialogue()
             );
           }}
