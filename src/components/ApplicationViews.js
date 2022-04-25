@@ -6,6 +6,7 @@ import { PostList } from "./post/PostList"
 import { PostForm } from "./post/PostForm";
 import { TagsList } from "./tags/TagsList";
 import { UserPostList } from "./user/UserPosts";
+import { EditPost } from "./user/EditPost";
 
 export const ApplicationViews = () => {
   return (
@@ -29,6 +30,9 @@ export const ApplicationViews = () => {
       </Route>
       <Route exact path="/my-posts">
         < UserPostList/>
+      </Route>
+      <Route exact path="/edit/:postId(\d+)">
+        < EditPost/>
       </Route>
     </>
   );

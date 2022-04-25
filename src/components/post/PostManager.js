@@ -6,9 +6,16 @@ export const getUserPosts = (id) => {
 };
 
 export const getSinglePost = (postId) => {
-  return fetch(`http://localhost:8088/posts/${postId}`)
-  .then(response => response.json())
-}
+  return fetch(`http://localhost:8088/posts/${postId}`).then((response) =>
+    response.json()
+  );
+};
+
+export const deletePost = (postId) => {
+  return fetch(`http://localhost:8088/posts/${postId}`, {
+    method: "DELETE",
+  });
+};
 
 export const getPostsByCategoryId = (categoryId) => {
   return fetch(`http://localhost:8088/posts?category_id=${categoryId}`)
@@ -18,11 +25,23 @@ export const getPostsByCategoryId = (categoryId) => {
 
 export const createPost = (body) => {
   return fetch(`http://localhost:8088/posts`, {
-      method: "POST",
+
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  }).then((response) => response.json());
+};
+
+
+export const editPost = (body) => {
+  return fetch(`http://localhost:8088/posts/${body.id}`, {
+      method: "PUT",
       headers: {
           "Content-Type": "application/json"
       },
       body: JSON.stringify(body)
   })
-      .then(response => response.json())
 }
+
