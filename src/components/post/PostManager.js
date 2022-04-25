@@ -19,7 +19,12 @@ export const deletePost = (postId) => {
   });
 };
 
-// sends post body as post to API
+export const getPostsByCategoryId = (categoryId) => {
+  return fetch(`http://localhost:8088/posts?category_id=${categoryId}`)
+  .then(response => response.json())
+}
+
+
 export const createPost = (body) => {
   return fetch(`http://localhost:8088/posts`, {
 
