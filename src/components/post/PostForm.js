@@ -5,7 +5,7 @@ import { getCategories } from "../categories/CategoriesManager";
 import "./Post.css"
 import { getAllTags } from "../tags/tagsManager";
 
-
+// this module is the post form to make new posts
 export const PostForm = () => {
     const [categories, setCategories] = useState([])
     const [posts, setPosts] = useState([])
@@ -22,14 +22,14 @@ export const PostForm = () => {
         publication_date: Date(Date.now()).toLocaleString('en-us').split('GMT')[0]
     })
     const history = useHistory()
-
+// get all categories fro API
     useEffect(
         () => {
             getCategories()
                 .then(data => setCategories(data))
         }, []
     )
-
+// get posts from API
     useEffect(
         () => {
             getPosts()
@@ -56,9 +56,10 @@ export const PostForm = () => {
         newPost[event.target.name] = event.target.value
         setPost(newPost)
     }
-
+// function makes new object to send to API, then sends user to the new post details page
     const handleSubmit = (e) => {
         e.preventDefault()
+        // get last index to push user to new page after API call
         const lastIndex = posts.length - 1
         const lastPostId = posts[lastIndex].id + 1
         const newPost = {
@@ -81,7 +82,8 @@ export const PostForm = () => {
     }
 
     const onRemoveTag = (index) => {
-        const list = checkedTags.splice(index, 1)
+        let copy = [...checkedTags]
+        const list = copy.splice(index, 1)
         setCheckedTags(list)
     }
 
@@ -90,34 +92,27 @@ export const PostForm = () => {
             index === position ? !item : item
         )
 
-        setCheckedState(updatedCheckedState)
 
         updatedCheckedState?.map((state, index) => {
-
-            const allTags = updatedCheckedState.reduce(
-                (selectedTags, currentState, index) => {
-                    if (currentState === true) {
-                        selectedTags.append(tags[index].id)
-                    }
-                    return selectedTags
-                },
-                []
-            )
-            // if (state === true & index === position) {
-            //     const newIndex = index + 1
-            //     console.log(newIndex)
-            //     const findTag = checkedTags.find(tag => tag === newIndex)
-            //     console.log(findTag)
-            //     if (!findTag) {
-            //     onAddTag(newIndex)
-            //     }
-            // else if (state === false)
-            //     if (findTag) {
-            //         checkedTags.filter(tag => tag !== newIndex)
-            //     }
-            // }
+            if (state === true & index === position) {
+                const newIndex = index + 1
+                console.log(newIndex)
+                const findTag = checkedTags.find(tag => tag === newIndex)
+                console.log(findTag)
+                if (!findTag) {
+                onAddTag(newIndex)
+                }
+            }
+            else if (state === false) {
+                const newIndex = index + 1
+                const findTag = checkedTags.find(tag => tag === newIndex)
+                if (findTag) {
+                    const selectedIndex = checkedTags.indexOf(newIndex) + 1
+                    onRemoveTag(selectedIndex)
+                }
+            }
         })
-        setCheckedTags(allTags)
+        setCheckedState(updatedCheckedState)
     }
 
     return (

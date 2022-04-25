@@ -6,7 +6,6 @@ import { getCategories } from "../categories/CategoriesManager";
 import { DeleteDialogue } from "./PostModal";
 import { useModal } from "./UseModal";
 
-
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([])

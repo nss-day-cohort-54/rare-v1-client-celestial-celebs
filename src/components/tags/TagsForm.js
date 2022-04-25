@@ -2,15 +2,16 @@ import React from "react";
 import "../categories/Category.css"
 import { createTag } from "./tagsManager";
 
+// function allows user to make new tags for posts
 export const TagsForm = ({tag, setTag}) => {
 
-
+// listens to key stroke for controlled input- updates state
     const changeTagState = (event) => {
         const newTag = Object.assign({}, tag)
         newTag[event.target.name] = event.target.value
         setTag(newTag)
     }
-
+// sends post to API to make new tag
     const handleSubmit = (e) => {
         createTag(tag)
     }

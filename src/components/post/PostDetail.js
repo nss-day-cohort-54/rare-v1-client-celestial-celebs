@@ -2,11 +2,11 @@ import { getSinglePost } from "./PostManager"
 import { useParams } from "react-router-dom"
 import React, { useState, useEffect } from "react"
 
+// post detail page
 export const Post = () => {
     const [currentPost, setCurrentPost] = useState()
-
     const postId = useParams()
-
+    // get specific post from API
     useEffect(
         () => {
             getSinglePost(postId.postId)
