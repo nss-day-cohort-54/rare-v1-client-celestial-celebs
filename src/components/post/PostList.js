@@ -3,7 +3,6 @@ import { useHistory, Link } from "react-router-dom";
 import { getPosts, getPostsByCategoryId, deletePost } from "./PostManager";
 import Post from "./Post";
 import { getCategories } from "../categories/CategoriesManager";
-import Post from "./Post";
 import { DeleteDialogue } from "./PostModal";
 import { useModal } from "./UseModal";
 
