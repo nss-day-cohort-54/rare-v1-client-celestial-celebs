@@ -1,9 +1,10 @@
+import { getAllUsers } from "./usersManager";
+
 export const PostList = () => {
-    const [posts, setPosts] = useState([]);
-    const history = useHistory();
+    const [users, setUsers] = useState([]);
   
     useEffect(() => {
-      getPosts().then((postData) => setPosts(postData));
+      getAllUsers().then((postData) => setUsers(postData));
     }, []);
   
     return ()

@@ -8,22 +8,30 @@ export const getUserPosts = (id) => {
 };
 // get a single specific post by id
 export const getSinglePost = (postId) => {
-  return fetch(`http://localhost:8088/posts/${postId}`)
-  .then(response => response.json())
-}
+  return fetch(`http://localhost:8088/posts/${postId}`).then((response) =>
+    response.json()
+  );
+};
+
+export const deletePost = (postId) => {
+  return fetch(`http://localhost:8088/posts/${postId}`, {
+    method: "DELETE",
+  });
+};
 
 // sends post body as post to API
 export const createPost = (body) => {
   return fetch(`http://localhost:8088/posts`, {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(body)
-  })
-      .then(response => response.json())
-}
-// sends put call to API to edit post
+
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  }).then((response) => response.json());
+};
+
+
 export const editPost = (body) => {
   return fetch(`http://localhost:8088/posts/${body.id}`, {
       method: "PUT",
@@ -33,3 +41,4 @@ export const editPost = (body) => {
       body: JSON.stringify(body)
   })
 }
+
