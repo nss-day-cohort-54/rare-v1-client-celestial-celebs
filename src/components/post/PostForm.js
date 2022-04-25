@@ -3,11 +3,17 @@ import { useHistory } from "react-router-dom";
 import { createPost, getPosts } from "./PostManager"
 import { getCategories } from "../categories/CategoriesManager";
 import "./Post.css"
+import { getAllTags } from "../tags/tagsManager";
 
-
+// this module is the post form to make new posts
 export const PostForm = () => {
     const [categories, setCategories] = useState([])
     const [posts, setPosts] = useState([])
+    const [tags, setTags] = useState([])
+    const [checkedTags, setCheckedTags] = useState([])
+    const [checkedState, setCheckedState] = useState(
+        new Array(tags?.length).fill(false)
+    )
     const [post, setPost] = useState({
         title: "",
         content: "",
@@ -16,19 +22,32 @@ export const PostForm = () => {
         publication_date: Date(Date.now()).toLocaleString('en-us').split('GMT')[0]
     })
     const history = useHistory()
-
+// get all categories fro API
     useEffect(
         () => {
             getCategories()
                 .then(data => setCategories(data))
         }, []
     )
-
+// get posts from API
     useEffect(
         () => {
             getPosts()
                 .then(data => setPosts(data))
         }, []
+    )
+
+    useEffect(
+        () => {
+            getAllTags()
+                .then(data => setTags(data))
+        }, []
+    )
+
+    useEffect(
+        () => {
+            setCheckedState(new Array(tags?.length).fill(false))
+        }, [tags]
     )
 
 
@@ -37,9 +56,10 @@ export const PostForm = () => {
         newPost[event.target.name] = event.target.value
         setPost(newPost)
     }
-
+// function makes new object to send to API, then sends user to the new post details page
     const handleSubmit = (e) => {
         e.preventDefault()
+        // get last index to push user to new page after API call
         const lastIndex = posts.length - 1
         const lastPostId = posts[lastIndex].id + 1
         const newPost = {
@@ -49,12 +69,51 @@ export const PostForm = () => {
             publication_date: post.publication_date,
             content: post.content
         }
+        newPost.tags = checkedTags
 
         createPost(newPost)
             .then(getPosts)
             .then(() => history.push(`/posts/${lastPostId}`))
     }
 
+    const onAddTag = (value) => {
+        const list = checkedTags.concat(parseInt(value))
+        setCheckedTags(list)
+    }
+
+    const onRemoveTag = (index) => {
+        let copy = [...checkedTags]
+        const list = copy.splice(index, 1)
+        setCheckedTags(list)
+    }
+
+    const handleOnChange = (position) => {
+        const updatedCheckedState = checkedState?.map((item, index) =>
+            index === position ? !item : item
+        )
+
+
+        updatedCheckedState?.map((state, index) => {
+            if (state === true & index === position) {
+                const newIndex = index + 1
+                console.log(newIndex)
+                const findTag = checkedTags.find(tag => tag === newIndex)
+                console.log(findTag)
+                if (!findTag) {
+                onAddTag(newIndex)
+                }
+            }
+            else if (state === false) {
+                const newIndex = index + 1
+                const findTag = checkedTags.find(tag => tag === newIndex)
+                if (findTag) {
+                    const selectedIndex = checkedTags.indexOf(newIndex) + 1
+                    onRemoveTag(selectedIndex)
+                }
+            }
+        })
+        setCheckedState(updatedCheckedState)
+    }
 
     return (
         <section className="post_form_container">
@@ -70,19 +129,42 @@ export const PostForm = () => {
                         <textarea className="post_content" type="text" name="content" placeholder="Article content" value={post.content} onChange={changePostState} />
                     </div>
                 </div>
-                <div className="dropdown_container">
-                    <div className="control">
-                    <select className="category_dropdown"
-                        name="category_id"
-                        value={post.category_id}
-                        onChange={changePostState}>
-                            <option name="category_id" value="" >Select a category</option>
+                <div className="field">
+                    <label htmlFor="tags" className="label">Tags: </label>
+                    <ul className="tagBoxes">
                         {
-                            categories?.map((category, index) => {
-                                return <option key={index} name="category_id" value={category.id}>{category.label}</option>
+                            tags?.map((tag, index) => {
+                                return <li className="tagCheck" key={index}>
+                                    <label htmlFor={tag.label} className="tag_label">{tag.label} </label>
+                                    <div className="control">
+                                        <input
+                                            type="checkbox"
+                                            name={tag.label}
+                                            id={`custom-checkbox-${index}`}
+                                            value={tag.id}
+                                            className={tag.label}
+                                            checked={checkedState[index]}
+                                            onChange={() => handleOnChange(index)}
+                                        ></input>
+                                    </div>
+                                </li>
                             })
                         }
-                    </select>
+                    </ul>
+                </div>
+                <div className="dropdown_container">
+                    <div className="control">
+                        <select className="category_dropdown"
+                            name="category_id"
+                            value={post.category_id}
+                            onChange={changePostState}>
+                            <option name="category_id" value="" >Select a category</option>
+                            {
+                                categories?.map((category, index) => {
+                                    return <option key={index} name="category_id" value={category.id}>{category.label}</option>
+                                })
+                            }
+                        </select>
                     </div>
                 </div>
                 <div className="publishForm_button">

@@ -3,9 +3,12 @@ import { getAllTags } from "./tagsManager";
 import {BsFillPencilFill} from "react-icons/bs"
 import { TagsForm } from "./TagsForm";
 import "./tags.css"
+
+// lists all tags
 export const TagsList = () => {
     const [tags, setTags] = useState([])
     const [tag, setTag] = useState([])
+    
     useEffect(
         () => {
             getAllTags()
