@@ -8,3 +8,9 @@ export const getSingleUser = (userId) => {
     response.json()
   );
 };
+
+export const getPostsByUserId = (userId) => {
+  return fetch(`http://localhost:8088/posts?user_id=${userId}`).then((response) =>
+  response.json()
+  );
+}

@@ -5,6 +5,8 @@ import Post from "./Post";
 import { getCategories } from "../categories/CategoriesManager";
 import { DeleteDialogue } from "./PostModal";
 import { useModal } from "./UseModal";
+import { AuthorList } from "../search/AuthorDropdown";
+import { getAllUsers, getPostsByUserId } from "../user/usersManager";
 
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -13,6 +15,28 @@ export const PostList = () => {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const history = useHistory();
   const [currentPost, setCurrentPost] = useState();
+  const [author, setAuthor] = useState(0)
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    getAllUsers().then((data) => setUsers(data));
+  }, []);
+
+  const updateAuthorId = (event) => {
+    setAuthor(parseInt(event.target.value));
+  };
+
+  const updateCategoryId = (event) => {
+    setCategory_id(parseInt(event.target.value));
+  };
+
+  useEffect(() => {
+    if (author){
+      getPostsByUserId(author).then((data) => setFilteredPosts(data))
+    } else if (category_id) {
+      getPostsByCategoryId(category_id).then((data) => setFilteredPosts(data))
+    }
+    }, [author, category_id]);
 
   const { toggleDialogue, modalIsOpen } = useModal("delete-popup");
 
@@ -50,25 +74,24 @@ export const PostList = () => {
     getCategories().then((data) => setCategories(data));
   }, []);
 
-  useEffect(() => {
-    getPostsByCategoryId(category_id).then((data) => setFilteredPosts(data));
-  }, [category_id]);
 
-  const updateCategoryId = (event) => {
-    setCategory_id(event.target.value);
-  };
+
 
   return (
     <>
+      
       <DeleteDialogue
         deletePostObject={currentPost}
         toggleDialogue={toggleDialogue}
         setCurrentPost={setCurrentPost}
       />
       <div style={{ margin: "0rem 3rem" }}>
+        
         <h1 className="posts-list">Posts</h1>
 
         {/* <button onClick={() => history.push("/posts/create")}>Add Post</button> */}
+        <div className="parent-dropdown">
+            <AuthorList posts={posts} author={author} users={users} updateAuthorId={updateAuthorId}/>
         <div className="dropdown_container">
           <div className="control">
             <select
@@ -90,20 +113,22 @@ export const PostList = () => {
             </select>
           </div>
         </div>
+        </div>
         <article className="posts">
-          {category_id === 0
+          {category_id === 0 && author === 0
             ? posts?.map((post) => {
                 return (
-                  <section className="post" key={post.id}>
-                    <Link to={`/posts/${post.id}`}>
-                      <h3>{post.title}</h3>
-                    </Link>
-                    <h3>{post.user_id}</h3>
-                    <h3>{post.category.label}</h3>
-                  </section>
+                    <section className="post" key={post.id}>
+                        <Link to={`/posts/${post.id}`}>
+                            <h3>{post.title}</h3>
+                        </Link>
+                        <h3>{post.user_id}</h3>
+                        <h3>{post.category.label}</h3>
+                    </section>
                 );
-              })
-            : filteredPosts?.map((post) => {
+            })
+            : 
+            filteredPosts?.map((post) => {
                 return (
                   <section className="post" key={post.id}>
                     <Link to={`/posts/${post.id}`}>
@@ -118,7 +143,7 @@ export const PostList = () => {
         {/* <button onClick={() => history.push("/posts/create")}>Add Post</button> */}
         {/*if the user is logged in on /my-posts, they should be able to delete a post
           and a message that displays "are you sure you want to delete this post" should appear  */}
-        {posts.map((post) => {
+        {/* {posts.map((post) => {
           return (
             <>
               <div className="panel-block">
@@ -131,7 +156,7 @@ export const PostList = () => {
               </div>
             </>
           );
-        })}
+        })} */}
       </div>
     </>
   );
