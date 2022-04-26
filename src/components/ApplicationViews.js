@@ -1,18 +1,18 @@
-import React from "react"
-import { Route } from "react-router-dom"
-import { Post } from "./post/PostDetail"
+import React from "react";
+import { Route } from "react-router-dom";
+import { Post } from "./post/PostDetail";
 import { CategoriesList } from "./categories/CategoriesList";
-import { PostList } from "./post/PostList"
+import { PostList } from "./post/PostList";
 import { PostForm } from "./post/PostForm";
 import { TagsList } from "./tags/TagsList";
 import { UserPostList } from "./user/UserPosts";
 import { EditPost } from "./user/EditPost";
 import { UsersList } from "./user/UsersList";
+import { User } from "./user/UserDetail";
 
 export const ApplicationViews = () => {
   return (
     <>
-
       {/* <h1 >Welcome to Rare Publishing</h1> */}
       <Route exact path="/categories">
         <CategoriesList />
@@ -30,13 +30,16 @@ export const ApplicationViews = () => {
         <TagsList />
       </Route>
       <Route exact path="/my-posts">
-        < UserPostList/>
+        <UserPostList />
       </Route>
       <Route exact path="/user-management">
-        < UsersList/>
+        <UsersList />
       </Route>
       <Route exact path="/edit/:postId(\d+)">
-        < EditPost/>
+        <EditPost />
+      </Route>
+      <Route path="/users/:userId(\d+)">
+        <User />
       </Route>
     </>
   );

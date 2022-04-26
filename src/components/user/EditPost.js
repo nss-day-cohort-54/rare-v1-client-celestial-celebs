@@ -22,20 +22,7 @@ export const EditPost = () => {
     //iterate over postTags for postId to get tagIds
     //iterate over tagIds and subtract 1 to get the index of checkState that needs to be switched.
     const getCheckedTags = (tagsArray) => {
-        debugger
-        const newArray = []
-        console.log(tagsArray)
-        const filteredPostTags = tagsArray.map((tag) => {
-            if (tag.post_id === parseInt(postId)) {
-                newArray.append(tag)
-            }
-        })
-        filteredPostTags?.map(tag => {
-            const newIndex = tag.tag_id - 1
-            const updatedCheckedState = checkedState.map((item, index) =>
-                index === newIndex ? !item : item)
-            setCheckedState(updatedCheckedState)
-        })
+
     }
 
     useEffect(
