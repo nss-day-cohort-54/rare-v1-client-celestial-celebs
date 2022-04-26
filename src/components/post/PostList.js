@@ -8,9 +8,9 @@ import { useModal } from "./UseModal";
 
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
-  const [categories, setCategories] = useState([])
-  const [category_id, setCategory_id] = useState(0)
-  const [filteredPosts, setFilteredPosts] = useState([])
+  const [categories, setCategories] = useState([]);
+  const [category_id, setCategory_id] = useState(0);
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const history = useHistory();
   const [currentPost, setCurrentPost] = useState();
 
@@ -51,12 +51,12 @@ export const PostList = () => {
   }, []);
 
   useEffect(() => {
-    getPostsByCategoryId(category_id).then(data => setFilteredPosts(data))
+    getPostsByCategoryId(category_id).then((data) => setFilteredPosts(data));
   }, [category_id]);
 
   const updateCategoryId = (event) => {
-    setCategory_id(event.target.value)
-  }
+    setCategory_id(event.target.value);
+  };
 
   return (
     <>
@@ -68,48 +68,52 @@ export const PostList = () => {
       <div style={{ margin: "0rem 3rem" }}>
         <h1 className="posts-list">Posts</h1>
 
-
-      {/* <button onClick={() => history.push("/posts/create")}>Add Post</button> */}
-      <div className="dropdown_container">
-        <div className="control">
-          <select className="category_dropdown"
-            name="category_id"
-            value={category_id}
-            onChange={updateCategoryId}>
-            <option name="category_id" value="" >Select a category</option>
-            {
-              categories?.map((category, index) => {
-                return <option key={index} name="category_id" value={category.id}>{category.label}</option>
-              })
-            }
-          </select>
+        {/* <button onClick={() => history.push("/posts/create")}>Add Post</button> */}
+        <div className="dropdown_container">
+          <div className="control">
+            <select
+              className="category_dropdown"
+              name="category_id"
+              value={category_id}
+              onChange={updateCategoryId}
+            >
+              <option name="category_id" value="">
+                Select a category
+              </option>
+              {categories?.map((category, index) => {
+                return (
+                  <option key={index} name="category_id" value={category.id}>
+                    {category.label}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </div>
-      </div>
-      <article className="posts">
-        {category_id === 0?
-        posts?.map((post) => {
-          return (
-            <section className="post" key={post.id}>
-              <Link to={`/posts/${post.id}`}>
-                <h3>{post.title}</h3>
-              </Link>
-              <h3>{post.user_id}</h3>
-              <h3>{post.category.label}</h3>
-            </section>
-          );
-        })
-        :
-        filteredPosts?.map((post) => {
-          return (
-            <section className="post" key={post.id}>
-              <Link to={`/posts/${post.id}`}>
-                <h3>{post.title}</h3>
-              </Link>
-              <h3>{post.user_id}</h3>
-              <h3>{post.category.label}</h3>
-            </section>
-            );
-          })}
+        <article className="posts">
+          {category_id === 0
+            ? posts?.map((post) => {
+                return (
+                  <section className="post" key={post.id}>
+                    <Link to={`/posts/${post.id}`}>
+                      <h3>{post.title}</h3>
+                    </Link>
+                    <h3>{post.user_id}</h3>
+                    <h3>{post.category.label}</h3>
+                  </section>
+                );
+              })
+            : filteredPosts?.map((post) => {
+                return (
+                  <section className="post" key={post.id}>
+                    <Link to={`/posts/${post.id}`}>
+                      <h3>{post.title}</h3>
+                    </Link>
+                    <h3>{post.user_id}</h3>
+                    <h3>{post.category.label}</h3>
+                  </section>
+                );
+              })}
         </article>
         {/* <button onClick={() => history.push("/posts/create")}>Add Post</button> */}
         {/*if the user is logged in on /my-posts, they should be able to delete a post
