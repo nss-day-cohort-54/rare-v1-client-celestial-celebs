@@ -8,7 +8,7 @@ export default ({ post, confirmDelete }) => (
       <Link to={`/posts/${post.id}`}>{post.title}</Link>
     </h3>
     <div className="post__author">{post.user_id}</div>
-    <div className="post__category">{post.category_id}</div>
+    <div className="post__category">{post.category.label}</div>
     <button
       onClick={() => {
         confirmDelete(post);

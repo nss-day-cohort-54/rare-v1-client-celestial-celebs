@@ -89,13 +89,14 @@ export const PostList = () => {
         {category_id === 0?
         posts?.map((post) => {
           return (
-            <section className="post" key={post.id}>
-              <Link to={`/posts/${post.id}`}>
-                <h3>{post.title}</h3>
-              </Link>
-              <h3>{post.user_id}</h3>
-              <h3>{post.category.label}</h3>
-            </section>
+            <div className="panel-block">
+                <Post
+                  key={post.id}
+                  post={post}
+                  user={post.user_id}
+                  confirmDelete={confirmDelete}
+                />
+              </div>
           );
         })
         :
@@ -114,20 +115,6 @@ export const PostList = () => {
         {/* <button onClick={() => history.push("/posts/create")}>Add Post</button> */}
         {/*if the user is logged in on /my-posts, they should be able to delete a post
           and a message that displays "are you sure you want to delete this post" should appear  */}
-        {posts.map((post) => {
-          return (
-            <>
-              <div className="panel-block">
-                <Post
-                  key={post.id}
-                  post={post}
-                  user={post.user_id}
-                  confirmDelete={confirmDelete}
-                />
-              </div>
-            </>
-          );
-        })}
       </div>
     </>
   );
