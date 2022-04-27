@@ -1,0 +1,8 @@
+.comments-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    justify-items: center;
+    flex-wrap: wrap;
+    flex: 50%;
+}
