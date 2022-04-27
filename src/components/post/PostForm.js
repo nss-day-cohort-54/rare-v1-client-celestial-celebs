@@ -91,8 +91,6 @@ export const PostForm = () => {
         const updatedCheckedState = checkedState?.map((item, index) =>
             index === position ? !item : item
         )
-
-
         updatedCheckedState?.map((state, index) => {
             if (state === true & index === position) {
                 const newIndex = index + 1
