@@ -7,7 +7,7 @@ import { DeleteDialogue } from "./PostModal";
 import { useModal } from "./UseModal";
 import { AuthorList } from "../search/AuthorDropdown";
 import { getAllUsers, getPostsByUserId } from "../user/usersManager";
-
+import "./PostList.css"
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -100,7 +100,7 @@ export const PostList = () => {
               value={category_id}
               onChange={updateCategoryId}
             >
-              <option name="category_id" value="">
+              <option name="category_id" value="0">
                 Select a category
               </option>
               {categories?.map((category, index) => {
@@ -118,25 +118,25 @@ export const PostList = () => {
           {category_id === 0 && author === 0
             ? posts?.map((post) => {
                 return (
-                    <section className="post" key={post.id}>
-                        <Link to={`/posts/${post.id}`}>
+                    <table className="post" class="table" key={post.id}>
+                        <td><Link to={`/posts/${post.id}`}>
                             <h3>{post.title}</h3>
-                        </Link>
-                        <h3>{post.user_id}</h3>
-                        <h3>{post.category.label}</h3>
-                    </section>
+                        </Link></td>
+                        <td><h3>{post.user_id}</h3></td>
+                        <td><h3>{post.category.label}</h3></td>
+                    </table>
                 );
             })
             :
             filteredPosts?.map((post) => {
                 return (
-                  <section className="post" key={post.id}>
-                    <Link to={`/posts/${post.id}`}>
-                      <h3>{post.title}</h3>
-                    </Link>
-                    <h3>{post.user_id}</h3>
-                    <h3>{post.category.label}</h3>
-                  </section>
+                  <table className="post" class="table" key={post.id}>
+                        <td><Link to={`/posts/${post.id}`}>
+                            <h3>{post.title}</h3>
+                        </Link></td>
+                        <td><h3>{post.user_id}</h3></td>
+                        <td><h3>{post.category.label}</h3></td>
+                    </table>
                 );
               })}
         </article>
