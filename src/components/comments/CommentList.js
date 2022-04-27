@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPostComments } from "./commentsManager";
 import "./CommentsList.css"
-export const CommentsList = () => {
+export const CommentsList = ({currentPost}) => {
     const [comments, setComments] = useState([])
 
     const postId = useParams()

@@ -29,7 +29,7 @@ export const Post = () => {
         </div>
         <div className="comment-button-author-container">
             <div className="post_details_author">{currentPost.user.first_name} {currentPost.user.last_name}</div>
-            <Link class="button" id="comment-button" to={`/comments/${postId.postId}`}>COMMENTS</Link>
+            <Link class="button" id="comment-button" to={`/comments/${postId.postId}`} >COMMENTS</Link>
         </div>
         <div className="post_details_publication_date">{currentPost.publication_date}</div>
         <div className="post_details_content">{currentPost.content}</div>
