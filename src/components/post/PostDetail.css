@@ -1,0 +1,17 @@
+.comment-button-author-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.title-buttons-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.post-img{
+    display: flex;
+    justify-content: center;
+}
+
+
+

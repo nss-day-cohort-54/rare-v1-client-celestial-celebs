@@ -9,6 +9,7 @@ import { UserPostList } from "./user/UserPosts";
 import { EditPost } from "./user/EditPost";
 import { UsersList } from "./user/UsersList";
 import { User } from "./user/UserDetail";
+import { CommentsList } from "./comments/CommentList";
 
 export const ApplicationViews = () => {
   return (
@@ -40,6 +41,9 @@ export const ApplicationViews = () => {
       </Route>
       <Route path="/users/:userId(\d+)">
         <User />
+      </Route>
+      <Route exact path="/comments/:postId(\d+)">
+        <CommentsList />
       </Route>
     </>
   );
