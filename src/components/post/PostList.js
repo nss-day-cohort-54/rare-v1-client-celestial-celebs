@@ -79,14 +79,14 @@ export const PostList = () => {
 
   return (
     <>
-      
+
       <DeleteDialogue
         deletePostObject={currentPost}
         toggleDialogue={toggleDialogue}
         setCurrentPost={setCurrentPost}
       />
       <div style={{ margin: "0rem 3rem" }}>
-        
+
         <h1 className="posts-list">Posts</h1>
 
         {/* <button onClick={() => history.push("/posts/create")}>Add Post</button> */}
@@ -127,7 +127,7 @@ export const PostList = () => {
                     </section>
                 );
             })
-            : 
+            :
             filteredPosts?.map((post) => {
                 return (
                   <section className="post" key={post.id}>
@@ -145,8 +145,7 @@ export const PostList = () => {
           and a message that displays "are you sure you want to delete this post" should appear  */}
         {/* {posts.map((post) => {
           return (
-            <>
-              <div className="panel-block">
+            <div className="panel-block">
                 <Post
                   key={post.id}
                   post={post}
@@ -154,7 +153,6 @@ export const PostList = () => {
                   confirmDelete={confirmDelete}
                 />
               </div>
-            </>
           );
         })} */}
       </div>
